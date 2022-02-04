@@ -1,7 +1,7 @@
 {
   "name": "service-center-bot",
   "version": "1.0.0",
-    "bot-token": "5088725388:AAEWULUmVQJv_Sz2uzLwK6-02tgqPNc00pk",
+  "bot-token": "5088725388:AAEWULUmVQJv_Sz2uzLwK6-02tgqPNc00pk",
   "dependencies": {
   }
 }

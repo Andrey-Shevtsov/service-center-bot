@@ -1,4 +1,5 @@
-import http
+import requests
+import json
 
 
 class TelegramClientMeta(type):
@@ -13,7 +14,18 @@ class TelegramClientMeta(type):
 
 
 class TelegramClient(metaclass=TelegramClientMeta):
-    def f(self):
-        print("test")
+    _telegramId = ""
+    _req_address = "https://api.telegram.org/"
 
-    f()
+    def get_token(self):
+        cfg = open('../cfgs/package.json')
+        token = json.load(cfg)["bot-token"]
+        self._req_address += token + "/"
+
+
+    def send_message(self, msg):
+        api_string = self._req_address + "sendMessage"
+
+        # need to get receiver's id
+        # there is a problem with replying on messages
+        # add start() method (put in await state)
