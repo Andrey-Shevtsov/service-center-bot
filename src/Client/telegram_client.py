@@ -1,8 +1,9 @@
 import requests
+from telethon import TelegramClient
 import json
 
 
-class TelegramClientMeta(type):
+class ClientMeta(type):
     _instance = {}
 
     def __call__(cls, *args, **kwargs):
@@ -12,12 +13,10 @@ class TelegramClientMeta(type):
         return cls._instance[cls]
 
 
-class TelegramClient(metaclass=TelegramClientMeta):
+class Client(metaclass=ClientMeta):
     _telegramId = ""
     _req_address = "https://api.telegram.org/"
-
-    def __init__(self):
-        pass
+    _is_running = False
 
     def get_token(self):
         cfg = open('../cfgs/package.json')
@@ -34,3 +33,9 @@ class TelegramClient(metaclass=TelegramClientMeta):
 
     def long_poll(self):
         pass
+
+    def run(self):
+        self._is_running = True
+
+    def stop(self):
+        self._is_running = False
