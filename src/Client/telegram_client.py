@@ -1,5 +1,6 @@
 import requests
 from telethon import TelegramClient
+import os
 import json
 
 
@@ -19,9 +20,14 @@ class Client(metaclass=ClientMeta):
     _is_running = False
 
     def get_token(self):
-        cfg = open('../cfgs/package.json')
+        cwd = os.getcwd()
+        os.chdir("..")
+        cfg = open(os.getcwd() + "\src\cfgs\package.json", "r")
         token = json.load(cfg)["bot-token"]
         self._req_address += token + "/"
+        cfg.close()
+        os.chdir(cwd)
+        print("request address:" + self._req_address)
 
     def send_message(self, msg):
         api_string = self._req_address + "sendMessage"
@@ -36,6 +42,11 @@ class Client(metaclass=ClientMeta):
 
     def run(self):
         self._is_running = True
+        print("Client is now running")
 
     def stop(self):
         self._is_running = False
+        print("Client is no longer running")
+
+    while _is_running:
+        pass
