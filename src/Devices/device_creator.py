@@ -9,4 +9,23 @@ class DeviceFactoryMeta(type):
 
 
 class DeviceFactory(metaclass=DeviceFactoryMeta):
-    pass
+
+    _params = []
+
+    def set_params(self, *args):
+        self._params = args
+
+    def get_params(self):
+        return self._params
+
+    def create_device(self):
+        device = Device(self._params)
+        return device
+
+class Device:
+
+    _properties = []
+
+    def __init__(self, *args):
+        self._properties = args
+
