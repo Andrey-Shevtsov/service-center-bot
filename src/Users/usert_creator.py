@@ -9,4 +9,25 @@ class UserFactoryMeta(type):
 
 
 class UserFactory(metaclass=UserFactoryMeta):
-    pass
+    _params = []
+
+    def set_params(self, *params):
+        self._params = params
+
+    def get_params(self):
+        return self._params
+
+    def create_user(self):
+        user = User(self._params)
+        return user
+
+
+class User:
+
+    _properties = []
+
+    def __init__(self, *args):
+        self._properties = args
+
+    def execute_command(self, command):
+        command.execute()
