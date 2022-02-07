@@ -1,7 +1,6 @@
-import requests
-from telethon import TelegramClient
 import os
 import json
+import requests
 
 
 class ClientMeta(type):
@@ -24,7 +23,7 @@ class Client(metaclass=ClientMeta):
         os.chdir("..")
         cfg = open(os.getcwd() + "\src\cfgs\package.json", "r")
         token = json.load(cfg)["bot-token"]
-        self._req_address += token + "/"
+        self._req_address += "bot" + token + "/"
         cfg.close()
         os.chdir(cwd)
         print("request address:" + self._req_address)
@@ -38,7 +37,10 @@ class Client(metaclass=ClientMeta):
         # add start() method (put in await state)
 
     def long_poll(self):
-        pass
+        api_string = self._req_address + "getUpdates"
+        api_params = {"timeout": '60'}
+        data = requests.get(api_string, params=api_params)
+        return data.text
 
     def run(self):
         self._is_running = True
@@ -48,5 +50,8 @@ class Client(metaclass=ClientMeta):
         self._is_running = False
         print("Client is no longer running")
 
-    while _is_running:
-        pass
+    def set_telegram_id(self, tg_id):
+        self._telegramId = tg_id
+
+    def get_telegram_id(self):
+        return self._telegramId
