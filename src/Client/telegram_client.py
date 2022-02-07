@@ -1,3 +1,4 @@
+from StateMachine import states
 import os
 import json
 import requests
@@ -19,10 +20,10 @@ class Client(metaclass=ClientMeta):
     _is_running = False
     _state = None
 
-    def __init__(self, state: State) -> None:
-        self.transition_to(state)
+    def __init__(self) -> None:
+        self.transition_to(states.StartState)
 
-    def transition_to(self, state: State):
+    def transition_to(self, state):
         self._state = state
 
     def get_token(self):
