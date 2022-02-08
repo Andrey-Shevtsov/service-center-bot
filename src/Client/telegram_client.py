@@ -20,12 +20,6 @@ class Client(metaclass=ClientMeta):
     _is_running = False
     _state = None
 
-    def __init__(self) -> None:
-        self.transition_to(states.StartState)
-
-    def transition_to(self, state):
-        self._state = state
-
     def get_token(self):
         cwd = os.getcwd()
         os.chdir("..")

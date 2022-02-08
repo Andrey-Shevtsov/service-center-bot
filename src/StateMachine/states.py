@@ -1,7 +1,33 @@
 from abc import ABC, abstractmethod
 
 
+class Context:
+
+    _state = None
+
+    def __init__(self, state: State):
+        self.transition_to(state)
+
+    def transition_to(self, state: State):
+        self._state = state
+        self._state.context = self
+
+    def request(self):
+        self._state.shoe_buttons()
+
+
 class State(ABC):
+
+    def __init__(self):
+        self._context = None
+
+    @property
+    def context(self) -> Context:
+        return self._context
+
+    @context.setter
+    def context(self, context: Context) -> None:
+        self._context = context
 
     @abstractmethod
     def show_buttons(self):
