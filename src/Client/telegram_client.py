@@ -1,4 +1,4 @@
-from StateMachine import states
+# from StateMachine import states
 import os
 import json
 import requests
@@ -15,9 +15,10 @@ class ClientMeta(type):
 
 
 class Client(metaclass=ClientMeta):
+    offset = 364361446
     _telegramId = ""
     _req_address = "https://api.telegram.org/"
-    _is_running = False
+    is_running = False
     _state = None
 
     def get_token(self):
@@ -32,7 +33,6 @@ class Client(metaclass=ClientMeta):
 
     def send_message(self, msg):
         api_string = self._req_address + "sendMessage"
-        pass
 
         # need to get receiver's id
         # there is a problem with replying on messages
@@ -40,16 +40,17 @@ class Client(metaclass=ClientMeta):
 
     def long_poll(self):
         api_string = self._req_address + "getUpdates"
-        api_params = {"offset": '2', "timeout": '60'}
+        api_params = {"offset": self.offset, "limit": '1', "timeout": '60'}
         data = requests.get(api_string, params=api_params)
+        self.offset += 1
         return data.text
 
     def run(self):
-        self._is_running = True
+        self.is_running = True
         print("Client is now running")
 
     def stop(self):
-        self._is_running = False
+        self.is_running = False
         print("Client is no longer running")
 
     def set_telegram_id(self, tg_id):

@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class Context:
-
     _state = None
 
     def __init__(self, state: State):
@@ -35,7 +34,6 @@ class State(ABC):
 
 
 class StartState(State):
-
     _condition = "start"
 
     def show_buttons(self):
@@ -43,7 +41,6 @@ class StartState(State):
 
 
 class AddUser(State):
-
     _condition = "addUser"
 
     def show_buttons(self):
@@ -51,7 +48,6 @@ class AddUser(State):
 
 
 class AddDevice(State):
-
     _condition = "addDevice"
 
     def show_buttons(self):
@@ -59,7 +55,6 @@ class AddDevice(State):
 
 
 class ShowDevices(State):
-
     _condition = "showDevice"
 
     def show_buttons(self):
@@ -67,7 +62,6 @@ class ShowDevices(State):
 
 
 class SearchDevices(State):
-
     _condition = "searchDevices"
 
     def show_buttons(self):
@@ -75,7 +69,6 @@ class SearchDevices(State):
 
 
 class AdminState(State):
-
     _condition = "admin"
 
     def show_buttons(self):
@@ -83,7 +76,6 @@ class AdminState(State):
 
 
 class EngineerState(State):
-
     _condition = "engineer"
 
     def show_buttons(self):
@@ -91,7 +83,6 @@ class EngineerState(State):
 
 
 class WarehousemanState(State):
-
     _condition = "warehouseman"
 
     def show_buttons(self):
@@ -99,7 +90,6 @@ class WarehousemanState(State):
 
 
 class MyDevices(State):
-
     _conditions = "myDevices"
 
     def show_buttons(self):
@@ -107,7 +97,6 @@ class MyDevices(State):
 
 
 class AllDevices(State):
-
     _condition = "allDevices"
 
     def show_buttons(self):
@@ -115,7 +104,6 @@ class AllDevices(State):
 
 
 class BySn(State):
-
     _condition = "bySN"
 
     def show_buttons(self):
@@ -123,7 +111,6 @@ class BySn(State):
 
 
 class ByName(State):
-
     _condition = "byName"
 
     def show_buttons(self):
@@ -131,7 +118,6 @@ class ByName(State):
 
 
 class ByTimeInterval(State):
-
     _condition = "byTimeInterval"
 
     def show_buttons(self):
@@ -139,7 +125,6 @@ class ByTimeInterval(State):
 
 
 class ByStatus(State):
-
     _condition = "byStatus"
 
     def show_buttons(self):
