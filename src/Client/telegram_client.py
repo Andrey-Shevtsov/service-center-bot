@@ -31,8 +31,11 @@ class Client(metaclass=ClientMeta):
         os.chdir(cwd)
         print("request address:" + self._req_address)
 
-    def send_message(self, msg):
+    def send_message(self, *args):
         api_string = self._req_address + "sendMessage"
+        api_params = {"chat_id": args[0], "text": args[1]}
+        result = requests.get(api_string, params=api_params)
+        return result
 
         # need to get receiver's id
         # there is a problem with replying on messages
