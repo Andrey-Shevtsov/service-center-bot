@@ -14,6 +14,11 @@ if __name__ == '__main__':
             print("offset: " + str(client.offset))
         else:
             print(data)
+            reply = {
+                "id": data["id"],
+                "message": "ping"
+            }
+            client.send_message(reply)
             data = None
             if i == 5:
                 client.stop()

@@ -33,7 +33,7 @@ class Client(metaclass=ClientMeta):
 
     def send_message(self, *args):
         api_string = self._req_address + "sendMessage"
-        api_params = {"chat_id": args[0], "text": args[1]}
+        api_params = {"chat_id": args[0]["id"], "text": args[0]["message"]}
         result = requests.get(api_string, params=api_params)
         return result
 
