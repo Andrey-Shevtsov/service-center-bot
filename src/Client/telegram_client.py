@@ -42,11 +42,17 @@ class Client(metaclass=ClientMeta):
         # add start() method (put in await state)
 
     def long_poll(self):
+        result = {
+            "id": "",
+            "text": ""
+        }
         api_string = self._req_address + "getUpdates"
         api_params = {"offset": self.offset, "limit": '1', "timeout": '60'}
         data = requests.get(api_string, params=api_params)
         self.offset += 1
-        return data.text
+        result["id"] = data.json()["result"][0]["message"]["from"]["id"]
+        result["text"] = data.json()["result"][0]["message"]["text"]
+        return result
 
     def run(self):
         self.is_running = True
