@@ -15,7 +15,7 @@ class ClientMeta(type):
 
 
 class Client(metaclass=ClientMeta):
-    offset = 364361446
+    offset = 0
     _telegramId = ""
     _req_address = "https://api.telegram.org/"
     is_running = False
@@ -47,9 +47,12 @@ class Client(metaclass=ClientMeta):
             "text": ""
         }
         api_string = self._req_address + "getUpdates"
-        api_params = {"offset": self.offset, "limit": '1', "timeout": '60'}
+        if self.offset == 0:
+            api_params = {"limit": '1', "timeout": '60'}
+        else:
+            api_params = {"offset": self.offset, "limit": '1', "timeout": '60'}
         data = requests.get(api_string, params=api_params)
-        self.offset += 1
+        self.offset = data.json()["result"][0]["update_id"] + 1
         result["id"] = data.json()["result"][0]["message"]["from"]["id"]
         result["text"] = data.json()["result"][0]["message"]["text"]
         return result

@@ -1,6 +1,8 @@
 from Client import telegram_client
+import asyncio
 
-if __name__ == '__main__':
+
+def main():
     data = None
     i = 0
     client = telegram_client.Client()
@@ -22,3 +24,7 @@ if __name__ == '__main__':
             data = None
             if i == 5:
                 client.stop()
+
+
+if __name__ == '__main__':
+    main()
