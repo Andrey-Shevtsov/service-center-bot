@@ -20,14 +20,15 @@ class Client(metaclass=ClientMeta):
     _req_address = "https://api.telegram.org/"
     is_running = False
     _state = None
+    _cfg = None
 
     def get_token(self):
         cwd = os.getcwd()
         os.chdir("..")
-        cfg = open(os.getcwd() + "\src\cfgs\package.json", "r")
-        token = json.load(cfg)["bot-token"]
+        self._cfg = open(os.getcwd() + "\src\cfgs\package.json", "r")
+        token = json.load(self._cfg)["bot-token"]
         self._req_address += "bot" + token + "/"
-        cfg.close()
+        self._cfg.close()
         os.chdir(cwd)
         print("request address:" + self._req_address)
 
